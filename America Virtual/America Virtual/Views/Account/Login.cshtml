@@ -1,0 +1,33 @@
+﻿@using America_Virtual.Models
+@model AccountModel
+
+@*<ul class="nav navbar-nav navbar-right">
+
+        <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>*@
+<ul class="nav navbar-nav navbar-right">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle btn btn-orange" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Iniciar Sesión  <i class="fas fa-user-alt"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-login">
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal form-login", role = "form" }))
+            {
+                <div class="div-login">
+                    <span class="control-label">Usuario</span>
+                    @Html.TextBoxFor(m => m.User, new { @class = "form-control", @placeholder = "Usuario" })
+                    @Html.ValidationMessageFor(m => m.User, "", new { @class = "text-danger" })
+                    <span class="control-label">Contraseña</span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Contraseña" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <p>
+                        @Html.ActionLink("Registrarse como usuario nuevo", "Register", "Account")
+                    </p>
+                    <input class="btn btn-primary" type="submit" name="submit" value="Iniciar Sesión">
+                </div>
+            }
+        </div>
+    </li>
+</ul>
+
+

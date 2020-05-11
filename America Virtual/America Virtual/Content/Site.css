@@ -1,0 +1,115 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    counter-reset: number;
+}
+
+.content {
+    display: grid;
+    grid-template-rows: 50px auto 1fr;
+}
+
+.av-logo {
+    width: 263px;
+    height: auto;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 280px auto;
+    padding: 5px 30vh;
+    background-color: #FF6859;
+}
+
+.login {
+    display: grid;
+    justify-content: right;
+}
+
+.btn-orange {
+    border-radius: 5px;
+    border-color: #fff;
+    border-width: 1px;
+}
+
+.navbar-nav > li > a {
+    margin: 3px;
+    padding: 5px 50px;
+    /*color: #fff*/
+}
+
+.dropdown-menu-login {
+    min-width: 300px;
+    padding-bottom: 10px;
+}
+
+.form-login {
+    display: grid;
+    justify-content: center;
+}
+
+.div-login {
+    display: grid;
+    width: 280px
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 6px
+}
+
+.btn-primary {
+    margin-top: 4px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.result {
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    height: 150px;
+    overflow: scroll;
+    background-color: #ccc;
+    list-style: none;
+    padding-left: 15px;
+}
+
+    .result .searchterm:hover {
+        background-color: #eee;
+    }
+
+    .result::-webkit-scrollbar {
+        display: none;
+    }
+
+.contentido-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(260px,1fr) minmax(200px, 1fr);
+    grid-template-areas: 'zonas reportediario' 'reportesemanal reportesemanal';
+    justify-content: center;
+    align-content: center;
+}
+.zonas {
+    grid-area: zonas;
+    background-color: coral;
+    padding:10vh 10vh;
+}
+.reporte-diario{
+    grid-area:reportediario;
+    background-color:rebeccapurple;
+}
+.reporte-semanal{
+    grid-area:reportesemanal;
+    background-color:aqua;
+}

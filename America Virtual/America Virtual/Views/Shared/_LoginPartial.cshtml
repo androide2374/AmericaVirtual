@@ -1,0 +1,54 @@
+﻿@using America_Virtual.Models
+@model UsuarioModel
+
+@if (America_Virtual.Helpers.AccountHelper.GetCurrentUser() != null)
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-orange" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <label id="boton-iniciar">@America_Virtual.Helpers.AccountHelper.GetCurrentUser().Nombre  </label><i class="fas fa-user-alt"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-login">
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @class = "form-horizontal form-login login", role = "form" }))
+                {
+                    <div class="div-login" id="Login-menu">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Cerrar Sesion">
+                    </div>
+                }
+            </div>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-orange" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <label id="boton-iniciar">Iniciar Sesión  </label><i class="fas fa-user-alt"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-login">
+                @*@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal form-login login", role = "form" }))
+                    {*@
+                <form class="form-horizontal form-login login" onsubmit="login(this)" method="post">
+                    <div class="div-login" id="Login-menu">
+                        <span class="control-label">Usuario</span>
+                        @Html.TextBoxFor(m => m.Usuario1, new { @class = "form-control login", @placeholder = "Usuario" })
+                        @Html.ValidationMessageFor(m => m.Usuario1, "", new { @class = "text-danger" })
+                        <span class="control-label">Contraseña</span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control login", @placeholder = "Contraseña" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        @if (ViewBag.ErrorLogin!=null)
+                        {
+                            <label>@ViewBag.ErrorLogin</label>
+                        }
+                        <br />
+                        <input class="btn btn-primary" type="button" onclick="login(form)" name="submit" value="Iniciar Sesión">
+                    </div>
+                </form>
+
+            </div>
+        </li>
+    </ul>
+}
+
+

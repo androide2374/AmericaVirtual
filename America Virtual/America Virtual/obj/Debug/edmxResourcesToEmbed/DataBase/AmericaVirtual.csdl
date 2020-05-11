@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AmericaVirtualModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Localidad">
+    <Key>
+      <PropertyRef Name="ORID" />
+    </Key>
+    <Property Name="ORID" Type="Guid" Nullable="false" />
+    <Property Name="CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EsLomas" Type="Boolean" />
+    <Property Name="IdLocalidades" Type="Guid" />
+    <NavigationProperty Name="Localidades" Relationship="Self.FK_Localidad_Localidades" FromRole="Localidad" ToRole="Localidades" />
+  </EntityType>
+  <EntityType Name="Localidades">
+    <Key>
+      <PropertyRef Name="ORID" />
+    </Key>
+    <Property Name="ORID" Type="Guid" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdPartido" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Localidad" Relationship="Self.FK_Localidad_Localidades" FromRole="Localidades" ToRole="Localidad" />
+    <NavigationProperty Name="Partidos" Relationship="Self.FK_Localidades_Partidos" FromRole="Localidades" ToRole="Partidos" />
+  </EntityType>
+  <EntityType Name="Partidos">
+    <Key>
+      <PropertyRef Name="ORID" />
+    </Key>
+    <Property Name="ORID" Type="Guid" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdProvincia" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Localidades" Relationship="Self.FK_Localidades_Partidos" FromRole="Partidos" ToRole="Localidades" />
+    <NavigationProperty Name="Provincias" Relationship="Self.FK_Partidos_Provincias" FromRole="Partidos" ToRole="Provincias" />
+  </EntityType>
+  <EntityType Name="Provincia">
+    <Key>
+      <PropertyRef Name="ORID" />
+    </Key>
+    <Property Name="ORID" Type="Guid" Nullable="false" />
+    <Property Name="CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Provincias">
+    <Key>
+      <PropertyRef Name="ORID" />
+    </Key>
+    <Property Name="ORID" Type="Guid" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Partidos" Relationship="Self.FK_Partidos_Provincias" FromRole="Provincias" ToRole="Partidos" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Localidad_Localidades">
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="0..1" />
+    <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidades">
+        <PropertyRef Name="ORID" />
+      </Principal>
+      <Dependent Role="Localidad">
+        <PropertyRef Name="IdLocalidades" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Localidades_Partidos">
+    <End Role="Partidos" Type="Self.Partidos" Multiplicity="1" />
+    <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partidos">
+        <PropertyRef Name="ORID" />
+      </Principal>
+      <Dependent Role="Localidades">
+        <PropertyRef Name="IdPartido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Partidos_Provincias">
+    <End Role="Provincias" Type="Self.Provincias" Multiplicity="1" />
+    <End Role="Partidos" Type="Self.Partidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincias">
+        <PropertyRef Name="ORID" />
+      </Principal>
+      <Dependent Role="Partidos">
+        <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AmericaVirtualEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+    <EntitySet Name="Localidades" EntityType="Self.Localidades" />
+    <EntitySet Name="Partidos" EntityType="Self.Partidos" />
+    <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+    <EntitySet Name="Provincias" EntityType="Self.Provincias" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_Localidad_Localidades" Association="Self.FK_Localidad_Localidades">
+      <End Role="Localidades" EntitySet="Localidades" />
+      <End Role="Localidad" EntitySet="Localidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Localidades_Partidos" Association="Self.FK_Localidades_Partidos">
+      <End Role="Partidos" EntitySet="Partidos" />
+      <End Role="Localidades" EntitySet="Localidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Partidos_Provincias" Association="Self.FK_Partidos_Provincias">
+      <End Role="Provincias" EntitySet="Provincias" />
+      <End Role="Partidos" EntitySet="Partidos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
