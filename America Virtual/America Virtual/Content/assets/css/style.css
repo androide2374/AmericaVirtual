@@ -22,6 +22,9 @@ body {
     min-width: 300px;
     padding-bottom: 10px;
 }
+.cartel{
+    grid-column:span 6/auto;
+}
 .contenedor-clima {
     width: 100%;
     margin: 10px 15px;
@@ -29,7 +32,7 @@ body {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 'pais icono' 'ciudad icono' 'dia icono' 'clima icono'
     /* 'temperatura icono' */
-    'temperatura humedad'  'temperatura viento';
+    'temperatura humedad' 'temperatura viento';
 }
 .contenedor-clima-horas {
     display: grid;
